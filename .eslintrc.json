@@ -1,0 +1,36 @@
+{
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "project": "tsconfig.json",
+      "tsconfigRootDir": "."
+    },
+    "plugins": ["import"],
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      },
+    "rules": {
+      "no-console": "warn",
+      "prefer-const": "error",
+      "indent": ["error", 2], // enforce 2 space indentation
+      "quotes": ["error", "single"], // enforce single quotes
+      "semi": ["error", "always"], // require semicolons at the end of statements
+      "no-unused-vars": "error", // warn about unused variables instead of error
+      "import/order": ["error", {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": false }
+      }],
+      "import/newline-after-import": ["error", { "count": 2 }] // enforce one newline after imports
+    }
+  }
