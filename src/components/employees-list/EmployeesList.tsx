@@ -1,17 +1,18 @@
 import { FC, PropsWithChildren } from 'react';
 
 import'./employeesList.css';
+import { IEmployee } from '../../interfaces/employees-interface';
 import EmployeesListItem from '../employees-list-item/EmployeesListItem';
 
 
-type IProps = PropsWithChildren
+interface IProps extends PropsWithChildren{
+  employees:IEmployee[]
+}
 
-const EmployeesList:FC<IProps> = () => {
+const EmployeesList:FC<IProps> = ({employees}) => {
   return (
     <ul className="app-list list-group">
-      <EmployeesListItem/>
-      <EmployeesListItem/>
-      <EmployeesListItem/>
+      {employees.length && employees.map(employee => <EmployeesListItem employee={employee} key={employee.id}/> )}
     </ul>
   );
 };

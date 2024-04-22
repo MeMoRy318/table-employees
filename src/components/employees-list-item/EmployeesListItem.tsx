@@ -1,15 +1,25 @@
 import {FC,PropsWithChildren} from 'react';
 
 import'./employeesListItem.css';
+import { IEmployee } from '../../interfaces/employees-interface';
 
 
-type IProps = PropsWithChildren
+interface IProps extends PropsWithChildren{
+  employee:IEmployee
+}
 
-const EmployeesListItem:FC<IProps> = () => {
+const EmployeesListItem:FC<IProps> = ({employee:{increase,name,salary}}) => {
+
+  let className = 'list-group-item d-flex justify-content-between';
+
+  if(increase){
+    className += ' increase';
+  }
+
   return (
-    <li className="list-group-item d-flex justify-content-between">
-      <span className="list-group-item-label">John Smith</span>
-      <input type="text" className="list-group-item-input" defaultValue="1000$"/>
+    <li className={className}>
+      <span className="list-group-item-label">{name}</span>
+      <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
       <div className='d-flex justify-content-center align-items-center'>
         <button type="button"
           className="btn-cookie btn-sm ">

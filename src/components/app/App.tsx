@@ -11,6 +11,12 @@ import SearchPanel from '../search-panel/SearchPanel';
 type IProps = PropsWithChildren
 
 const App:FC<IProps> = () => {
+  const data = [
+    {id:1,name:'Vasya',increase:false,salary:800},
+    {id:2,name:'Oleg',increase:true,salary:1000},
+    {id:3,name:'Kokos',increase:false,salary:900}
+  ]; 
+  
   return (
     <div className='app'>
       <AppInfo/>
@@ -18,9 +24,8 @@ const App:FC<IProps> = () => {
         <SearchPanel/>
         <AppFilter/>
       </div>
-      <EmployeesList/>
+      <EmployeesList employees={data}/>
       <EmployeesAddForm/>
-      
     </div>
   );
 };
