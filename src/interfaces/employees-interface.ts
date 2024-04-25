@@ -1,8 +1,14 @@
-interface IEmployee{
+interface IEmployeeFormData {
+    name: string;
+    salary: number | string;
+}
+
+
+interface IEmployee extends IEmployeeFormData{
     id: number
-    name: string,
-    salary: number,
     increase: boolean,
 }
 
-export type { IEmployee };
+
+
+export type { IEmployee,IEmployeeFormData };

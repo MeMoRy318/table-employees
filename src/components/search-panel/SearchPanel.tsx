@@ -5,6 +5,7 @@ import './searchPanel.css';
 
 type IProps = PropsWithChildren
 
+
 const SearchPanel:FC<IProps> = () => {
   return (
     <input type="text"
