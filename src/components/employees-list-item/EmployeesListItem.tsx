@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, useState } from 'react';
 
-import { IEmployee } from '../../interfaces/employees-interface';
+import { IEmployee,EEmployee } from '../../interfaces/employees-interface';
 
 import './employeesListItem.css';
 
@@ -8,27 +8,24 @@ import './employeesListItem.css';
 interface IProps extends PropsWithChildren {
   employee: IEmployee;
   deleteEmployee: (id: string | number) => void;
+  updateEmployee: (id: string | number, key: EEmployee, value: string | boolean) => void
 }
 
 
-const EmployeesListItem: FC<IProps> = ({ employee: { increase, name, salary,id },deleteEmployee }) => {
-  const [currentIncrease, setIncrease] = useState<boolean>(increase);
-  const [like, setLike] = useState<boolean>(false);
+const EmployeesListItem: FC<IProps> = ({ employee: { increase, name, salary,id,rise }, deleteEmployee, updateEmployee }) => {
   const [value,setValue] = useState<string>(String(salary));
 
 
-  const listItemClasses = `list-group-item d-flex justify-content-between${currentIncrease ? ' increase' : ''}${like ? ' like' : ''}`;
+  const listItemClasses = `list-group-item d-flex justify-content-between${increase ? ' increase' : ''}${rise ? ' like' : ''}`;
 
 
-  const handleIncrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setIncrease(prev => !prev);
   const handleChangeSalary = (e:React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value);
   const handleDelete = () => deleteEmployee(id);
-  const handleOnLike = () => setLike(prev => !prev);
 
 
   return (
     <li className={listItemClasses}>
-      <span className="list-group-item-label" onClick={handleOnLike}>{name}</span>
+      <span className="list-group-item-label" onClick={()=> updateEmployee( id, EEmployee.RISE, !rise)}>{name}</span>
       <input 
         type="text"
         name='salary'
@@ -40,7 +37,7 @@ const EmployeesListItem: FC<IProps> = ({ employee: { increase, name, salary,id }
         <button 
           type="button" 
           className="btn-cookie btn-sm" 
-          onClick={handleIncrease}>
+          onClick={() => updateEmployee( id, EEmployee.INCREASE, !increase)}>
           <i className="fas fa-cookie"></i>
         </button>
         <button 

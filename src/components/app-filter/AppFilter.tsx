@@ -1,21 +1,39 @@
+import { FC, PropsWithChildren,Dispatch } from 'react';
+
 import './appFilter.css';
 
 
-const AppFilter = () => {
+interface IProps extends PropsWithChildren{
+  filterParams: string;
+  setFilterParam: Dispatch<React.SetStateAction<string>>
+}
+
+const AppFilter:FC<IProps> = ({filterParams,setFilterParam}) => {
+  const buttonsData = [
+    {name: 'all', label: 'Все сотрудники'},
+    {name: 'rise', label: 'На повышение'},
+    {name: 'moreThen1000', label: 'З/П больше 1000$'}
+  ];
+
+
+  const button = buttonsData.map(element => {
+    const active = filterParams === element.name ? 'btn-light' : 'btn-outline-light';
+    return(
+      <button
+        key={element.name} 
+        type="button"
+        className={`btn ${active}`}
+        onClick={()=>setFilterParam(element.name)}
+      >
+        {element.label}
+      </button>
+    );
+  });
+
+
   return (
     <div className="btn-group">
-      <button type="button"
-        className="btn btn-light">
-            Все сотрудники
-      </button>
-      <button type="button"
-        className="btn btn-outline-light">
-            На повышение
-      </button>
-      <button type="button"
-        className="btn btn-outline-light">
-            З/П больше 1000$
-      </button>
+      {button}
     </div>
   );
 };
